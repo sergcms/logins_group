@@ -16,12 +16,7 @@ class Meta
      */
     public function handle($request, Closure $next)
     {
-        $currentUrl = url()->current();
-        $seoUrl = str_replace(url('/'), '', $currentUrl);
-
-        if(!$seoUrl) {
-            $seoUrl = '/';
-        }
+        $seoUrl = str_replace(url('/'), '', url()->current());
 
         $meta = Seo::where('url', $seoUrl)
                 ->Orwhere('url', mb_substr($seoUrl, 1))
