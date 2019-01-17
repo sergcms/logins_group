@@ -119,7 +119,7 @@
                                     <span>{{ $oneNews->title }}</span>
                                 </div>
                                 <div class="news-img">
-                                <a href="/news/{{ $oneNews->alias }}"><img src="{{ '/storage/' . $oneNews->image }}" alt=""></a>
+                                <a href="/news/{{ $oneNews->alias }}"><img src="{{ '/storage' . $oneNews->image }}" alt=""></a>
                                 </div>
                                 <p class="default-text small"> {{ $oneNews->preview }} </p>
                                 <div class="more text-right">

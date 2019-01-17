@@ -15,7 +15,7 @@ Route::get('/', 'NewsController@showNewsOnHome');
 
 Auth::routes();
 
-Route::get('/register', function () { return abort('404'); });
+Route::match(['get', 'post'], '/register', function () { return abort(404); });
 
 Route::get('/home', 'HomeController@index')->name('home');
 
