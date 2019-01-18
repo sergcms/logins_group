@@ -14,22 +14,16 @@
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
   
-  <!-- Scripts -->
-  {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
-  
   <!-- Google fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i|PT+Sans&amp;subset=cyrillic" rel="stylesheet">
   
   <!-- FONTAWESONE -->
   <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
   
-  <!-- BOOTSTRAP -->
-  {{-- <link href="{{ asset('css/bootstrap-grid.css') }}" rel="stylesheet"> --}}
-  
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   
-  <!-- CUSTOM STYLE -->
+  <!-- Custom Style -->
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">  
   
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

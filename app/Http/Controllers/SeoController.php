@@ -2,12 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Validator;
 use App\Seo;
+use Validator;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class SeoController extends Controller
 {
+    protected function validator(Request $request)
+    {
+        $fields = [
+            'url' => ['required', 'string', 'min:3', 'max:100',
+                Rule::unique('seo')->ignore($request->id),
+            ], 
+            'title' => 'required|string|min:5|max:100',
+            'keywords' => 'required|string',
+            'description' => 'required|string|max:100',
+        ];
+        
+        return Validator::make($request->all(), $fields)->validate();
+    }
+    
     public function list()
     {
         $seo = Seo::all();
@@ -28,6 +43,8 @@ class SeoController extends Controller
 
     public function create(Request $request)
     {
+        $this->validator($request);
+
         Seo::create([
             'url' => $request->url,
             'title' => $request->title,
@@ -40,6 +57,8 @@ class SeoController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->validator($request);
+
         Seo::where('id', $id)
             ->update([
                 'url' => $request->url,

@@ -17,30 +17,35 @@ Auth::routes();
 
 Route::match(['get', 'post'], '/register', function () { return abort(404); });
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->middleware(['auth'])->name('home');
 
 Route::get('/news/{alias}', 'NewsController@showNews');
 
 Route::prefix("/admin")->middleware(['auth'])->group( function () {
 
-    Route::get('/seo', 'SeoController@list')->name('seo-list');
+    Route::group(['prefix' => '/seo'], function () {
+       
+        Route::get('/', 'SeoController@list')->name('seo-list');
 
-    Route::get('/seo/create', 'SeoController@show');
-    Route::post('/seo/create', 'SeoController@create')->name('seo-create');
+        Route::get('/create', 'SeoController@show');
+        Route::post('/create', 'SeoController@create')->name('seo-create');
+    
+        Route::get('/edit/{id}', 'SeoController@show')->name('seo-edit');
+        Route::post('/edit/{id}', 'SeoController@update')->name('seo-update');
+    
+        Route::get('/delete/{id}', 'SeoController@delete')->name('seo-delete');
+    });
 
-    Route::get('/seo/edit/{id}', 'SeoController@show')->name('seo-edit');
-    Route::post('/seo/edit/{id}', 'SeoController@update')->name('seo-update');
+    Route::group(['prefix' => '/news'], function () {
+        Route::get('/', 'NewsController@list')->name('news');
 
-    Route::get('/seo/delete/{id}', 'SeoController@delete')->name('seo-delete');
+        Route::get('/create', 'NewsController@show');
+        Route::post('/create', 'NewsController@create')->name('news-create');
 
-    Route::get('/news', 'NewsController@list')->name('news');
+        Route::get('/edit/{id}', 'NewsController@show')->name('news-edit');
+        Route::post('/edit/{id}', 'NewsController@update')->name('news-update');
 
-    Route::get('/news/create', 'NewsController@show');
-    Route::post('/news/create', 'NewsController@create')->name('news-create');
-
-    Route::get('/news/edit/{id}', 'NewsController@show')->name('news-edit');
-    Route::post('/news/edit/{id}', 'NewsController@update')->name('news-update');
-
-    Route::get('/news/delete/{id}', 'NewsController@delete')->name('news-delete');
-
+        Route::get('/delete/{id}', 'NewsController@delete')->name('news-delete');
+    });
+    
 });

@@ -20,7 +20,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <!-- Styles -->
+    <!-- Custom Styles -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <!-- Tinymce -->

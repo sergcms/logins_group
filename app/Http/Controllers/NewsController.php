@@ -2,27 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Validator;
 use App\News;
+use Validator;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class NewsController extends Controller
 {
     protected function validator(Request $request)
     {
         $fields = [
-            'alias' => 'required|string|min:3|max:50',
+            'alias' => ['required', 'string', 'min:3', 'max:50',
+                Rule::unique('news')->ignore($request->id),
+            ], 
             'title' => 'required|string|min:3|max:50',
             'image' => 'required|image',
             'preview' => 'required|string',
             'news_content' => 'required', 
         ];
-        
-        if(!$request->id) {
-            $fields['alias'] = 'required|string|min:3|max:50|unique:news';
-        }
         
         return Validator::make($request->all(), $fields)->validate();
     }
@@ -61,6 +60,7 @@ class NewsController extends Controller
 
         $newsNext = News::where('id', '>', $news->id)
             ->where('published', 1)
+            ->orderBy('id', 'asc')
             ->first();
 
         return view('news', ['news' => $news, 'prev' => $newsPrev, 'next' => $newsNext]);
@@ -70,7 +70,6 @@ class NewsController extends Controller
     {
         if ($id) {
             $news = News::find($id);
-            Storage::disk('local')->exists('/public/' . $news->image) ? $news->image : '';
 
             return view('form.news', ['news' => $news, 'id' => $id]);
         }
@@ -130,4 +129,5 @@ class NewsController extends Controller
         
         return '/news/img/' . $image->getClientOriginalName();
     }
+
 }
