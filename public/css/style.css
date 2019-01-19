@@ -168,7 +168,9 @@ a:hover {
 .text-right {
 	text-align: right;
 }
-
+.bg-white-nav {
+	background: rgba(255, 255, 255, 0.5);
+}
 /* test */
 .line-link {
 	display: -webkit-box;
@@ -630,6 +632,7 @@ ul.circle-center li img {
 /* NEWS */
 .news-content {
 	padding: 100px 0 80px;
+	line-height: 1.8em;
 }
 /* NEWS END */
 .container .row.home {

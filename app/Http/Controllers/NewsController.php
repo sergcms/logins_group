@@ -6,11 +6,14 @@ use App\News;
 use Validator;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
+    /**
+     * validation fields on form
+     */
     protected function validator(Request $request)
     {
         $fields = [
@@ -26,6 +29,9 @@ class NewsController extends Controller
         return Validator::make($request->all(), $fields)->validate();
     }
     
+    /**
+     * show list news in admin panel
+     */
     public function list()
     {
         $news = News::all();
@@ -33,6 +39,9 @@ class NewsController extends Controller
         return view('admin.news-list', ['news' => $news]);
     }
 
+    /**
+     * show news on index page
+     */
     public function showNewsOnHome()
     {
         $countNews = env('COUNT_NEWS');
@@ -45,6 +54,9 @@ class NewsController extends Controller
         return view('index', ['news' => $news]);
     }
 
+    /**
+     * show one content news
+     */
     public function showNews($alias)
     {
         $news = News::where('alias', $alias)->first();
@@ -66,6 +78,9 @@ class NewsController extends Controller
         return view('news', ['news' => $news, 'prev' => $newsPrev, 'next' => $newsNext]);
     }
     
+    /**
+     * show form for create or edit news
+     */
     public function show($id = '')
     {
         if ($id) {
@@ -77,6 +92,9 @@ class NewsController extends Controller
         return view('form.news');
     }
 
+    /**
+     * create news in DB
+     */
     public function create(Request $request)
     {
         $this->validator($request);
@@ -96,6 +114,9 @@ class NewsController extends Controller
         return redirect(route('news'));
     }
 
+    /**
+     * update news in DB
+     */
     public function update(Request $request, $id)
     {
         $this->validator($request);
@@ -116,6 +137,9 @@ class NewsController extends Controller
         return redirect(route('news'));
     }
 
+    /**
+     * delete news in DB
+     */
     public function delete($id)
     {
         News::find($id)->delete();
@@ -123,6 +147,9 @@ class NewsController extends Controller
         return redirect(route('news'));
     }
 
+    /**
+     * save image and return path
+     */
     public function saveImage($image)
     {
         Storage::putFileAs('/public/news/img', $image, $image->getClientOriginalName());        

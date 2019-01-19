@@ -8,7 +8,7 @@ use App\Seo;
 class Meta
 {
     /**
-     * Handle an incoming request.
+     * Find seo in DB and return in view
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next

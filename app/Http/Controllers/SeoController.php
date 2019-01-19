@@ -9,6 +9,9 @@ use Illuminate\Validation\Rule;
 
 class SeoController extends Controller
 {
+    /**
+     * validation fields on form
+     */
     protected function validator(Request $request)
     {
         $fields = [
@@ -23,6 +26,9 @@ class SeoController extends Controller
         return Validator::make($request->all(), $fields)->validate();
     }
     
+    /**
+     * show list seo in admin panel 
+     */
     public function list()
     {
         $seo = Seo::all();
@@ -30,6 +36,9 @@ class SeoController extends Controller
         return view('admin.seo-list', ['seo' => $seo]);
     }
 
+    /**
+     * show form for create or edit seo
+     */
     public function show($id = '')
     {
         if ($id) {
@@ -41,6 +50,9 @@ class SeoController extends Controller
         return view('form.seo');
     }
 
+    /**
+     * create seo in DB
+     */
     public function create(Request $request)
     {
         $this->validator($request);
@@ -55,6 +67,9 @@ class SeoController extends Controller
         return redirect(route('seo-list'));
     }
 
+    /**
+     * update seo in DB
+     */
     public function update(Request $request, $id)
     {
         $this->validator($request);
@@ -70,6 +85,9 @@ class SeoController extends Controller
         return redirect(route('seo-list'));
     }
 
+    /**
+     * delete seo in DB
+     */
     public function delete($id)
     {
         Seo::where('id', $id)->delete();

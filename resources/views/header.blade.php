@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header {{ Request::is('news/*') ? 'bg-white-nav' : '' }}">
     <div class="container">
         <div class="name">
             <a href="/">LoginsGroup</a>

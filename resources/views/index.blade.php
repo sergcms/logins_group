@@ -7,7 +7,7 @@
             <li class="loginsgroup-logo show"><img src="{{ asset('img/logo.png') }}" alt="" /></li> 
             <li class="tdlogins-logo"><img src="{{ asset('img/logo_tdlogins.png') }}" alt="" /></li> 
             <li class="loginssmak-logo"><img src="{{ asset('img/logo_loginssmak.png') }}" alt="" /></li> 
-            <li class="shops-logo"><img src="{{ asset('img/logo_lukasik.png') }}" alt="" /></li> 
+            <li class="stores-logo"><img src="{{ asset('img/logo_lukasik.png') }}" alt="" /></li> 
             <li class="lukasik-logo"><img src="{{ asset('img/logo_brandstore.png') }}" alt="" /></li> 
         </ul>
         <!-- / circle-center -->
